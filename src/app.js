@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   res.render("index")
 })
 
-app.get("/reset", (req, res)=>{
+app.get("/reset", (req, res) => {
   res.render("reset_pass")
 });
 

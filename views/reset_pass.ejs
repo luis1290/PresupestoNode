@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restablecer contraseña</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/resetPass.css">
+  <link rel="shortcut icon" href="/spaguetti.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(1, 400px);
+      justify-content: center;
+      align-items: center;
+      padding: 200px;
+    }
+
+    .resetPass {
+      border: 1px solid black;
+      border-radius: 15px;
+      padding: 15px;
+      display: grid;
+      gap: 0.5rem;
+
+      justify-content: center;
+      align-items: center;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn {
+      width: 200px;
+      border-radius: 10px;
+      padding: 10px;
+      border: none;
+      background-color: #1d7fee;
+      color: aliceblue;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 1s all ease;
+    }
+
+    .btn:hover {
+      background-color: #15db78;
+    }
+
+    .passInput {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+
+
+    .destacado {
+      font-family: 'Carter One', cursive;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .title {
+      padding: 15px;
+      display: grid;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+
+  <div class="title">
+    <h1>Restablecer contraseña</h1>
+  </div>
+
+  <div class="resetPass">
+    <label class="destacado" for="fname">Nueva Contraseña:</label><br>
+    <input class="passInput" type="password" id="newPass" name="newPass"><br>
+
+    <label class="destacado" for="fname">Confirmar Nueva Contraseña:</label><br>
+    <input class="passInput" type="password" id="confirmPass" name="confirmPass"><br>
+
+    <button class="btn" id="btn">Restablecer contraseña</button>
+  </div>
+
+  <script>
+    const btn = document.getElementById("btn");
+
+    function getParameterValue(parameter) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(parameter);
+    }
+
+    const verifyEmail = () => {
+      const id = getParameterValue('id');
+      const password1 = document.getElementById("newPass").value;
+      const password2 = document.getElementById("confirmPass").value;
+
+      if (password1 === password2) {
+        const data = {
+          id: id,
+          password: password1
+        };
+
+        axios.put(`http://localhost:8000/resetpassword/`, data)
+          .then((resp) => {
+            Swal.fire('Restablecimiento de contraseña exitoso')
+            console.log(resp);
+          })
+          .catch(e => console.log(e));
+        console.log(id);
+      } else {
+        Swal.fire('Las contraseñas no coinciden')
+        return false;
+      }
+    }
+
+    btn.addEventListener("click", verifyEmail);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
