@@ -1,4 +1,4 @@
-const { createUser } = require("../repositories/users.repository")
+const { createUser, loginUser, updateUser } = require("../repositories/users.repository")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -49,7 +49,7 @@ class UserServices {
   }
 
   static async token(userData) {
-    const token = jwt.sign(userData, process.env.JWT_SECRET_LOGIN, {
+    const token = jwt.sign(userData, process.env.JWT_SECRET_EMAIL_VALIDATION, {
       algorithm: "HS512",
       expiresIn: "5h",
     });

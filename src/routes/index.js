@@ -9,10 +9,7 @@ const userRoute = require('./users.routes');
 
 const apiRouter = (app) => {
   app.use(userRoute);
-  // app.use(companyRoute);
-  // app.use(aplicationJobRouter);
-  // app.use(interviewRouter);
-  // app.use(recruiterRouter);
+ 
   // app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 }
 

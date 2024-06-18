@@ -9,7 +9,7 @@ const sendMail = (email, doc, attachments) => {
       from: process.env.G_USER,
       to: email,
       subject: "Bienvenido",
-      text: "Este seria el mensaje en texto plano",
+      text: "Bienvenido al sistema de aplicacion de trabajo",
       html: doc,
       attachments,
     })
@@ -17,85 +17,56 @@ const sendMail = (email, doc, attachments) => {
     .catch((error) => console.log(error));
 };
 
-const sendChackMail = async (email, data) => {
-  const filePath = path.join(__dirname, "../views/checkMail/checkMail.ejs");
+const sendWelcomeMail = async (email, data) => {
+  const filePath = path.join(__dirname, "../views/mails/Confirmation/confirmacion.ejs");
   const doc = await ejs.renderFile(filePath, data);
+  console.log(data)
 
   const attachments = [
     {
-      filename: "facebook2x.png",
-      path: path.join(__dirname, "../views/checkMail/images/facebook2x.png"),
-      cid: "facebook",
-    },
-    {
-      filename: "instagram2x.png",
-      path: path.join(__dirname, "../views/checkMail/images/instagram2x.png"),
-      cid: "instagram",
-    },
-    {
-      filename: "linkedin2x.png",
-      path: path.join(__dirname, "../views/checkMail/images/linkedin2x.png"),
-      cid: "linkedin",
-    },
-    {
-      filename: "twitter2x.png",
-      path: path.join(__dirname, "../views/checkMail/images/twitter2x.png"),
-      cid: "twitter",
-    },
+      filename: "onde.png",
+      path: path.join(__dirname, "../views/mails/Confirmation/onde.png"),
+      cid: "onde",
+    }
   ];
 
   sendMail(email, doc, attachments);
 };
 
-const sendPurchaseOrderMail = async (email, data) => {
-  const filePath = path.join(__dirname, "../views/purchaseOrder/purchaseOrder.ejs");
-  const doc = await ejs.renderFile(filePath, data)
+const sendResetMail = async (email, data) => {
+  const filePath = path.join(__dirname, "../views/mails/Confirmation/resetpass.ejs");
+  const doc = await ejs.renderFile(filePath, data);
+
   const attachments = [
     {
-      filename: "e-commerce.png",
-      path: path.join(__dirname, "../views/purchaseOrder/images/e-commerce.png"),
-      cid: "ecommerce",
-    },
+      filename: "onde.png",
+      path: path.join(__dirname, "../views/mails/Confirmation/onde.png"),
+      cid: "onde",
+    }
+  ];
+
+  sendMail(email, doc, attachments);
+}
+
+const sendChangePassMail = async (email, data) => {
+  const filePath = path.join(__dirname, "../views/mails/Confirmation/changepass.ejs");
+  const doc = await ejs.renderFile(filePath, data);
+
+  const attachments = [
     {
-      filename: "facebook2x.png",
-      path: path.join(__dirname, "../views/purchaseOrder/images/facebook2x.png"),
-      cid: "facebook"
-    },
-    {
-      filename: "instagram2x.png",
-      path: path.join(__dirname, "../views/purchaseOrder/images/instagram2x.png"),
-      cid: "instagram"
-    },
-    {
-      filename: "linkedin2x.png",
-      path: path.join(__dirname, "../views/purchaseOrder/images/linkedin2x.png"),
-      cid: "linkedin"
-    },
-    {
-      filename: "logo-gris_1.png",
-      path: path.join(__dirname, "../views/purchaseOrder/images/logo-gris_1.png"),
-      cid: "logo_gris"
-    },
-    {
-      filename: "logo.png",
-      path: path.join(__dirname, "../views/purchaseOrder/images/logo.png"),
-      cid: "logo"
-    },
-    {
-      filename: "separator.png",
-      path: path.join(__dirname, "../views/purchaseOrder/images/separator.png"),
-      cid: "separator"
-    },
-    {
-      filename: "twitter2x.png",
-      path: path.join(__dirname, "../views/purchaseOrder/images/twitter2x.png"),
-      cid: "twitter"
-    },
-  ]
-  sendMail(email, doc, attachments)
-};
+      filename: "onde.png",
+      path: path.join(__dirname, "../views/mails/Confirmation/onde.png"),
+      cid: "onde",
+    }
+  ];
+
+  sendMail(email, doc, attachments);
+}
+
+
 
 module.exports = {
-  sendChackMail,
-  sendPurchaseOrderMail
+  sendWelcomeMail,
+  sendResetMail,
+  sendChangePassMail
 };
