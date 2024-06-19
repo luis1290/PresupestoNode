@@ -2,39 +2,46 @@
 const { check } = require("express-validator");
 const validateResult = require("../utils/validate");
 
-const createUserValidator = [
-    check("name", "Error con el campo username")
+const createCategoryIncomeValidator = [
+    check("name", "Error con el campo name")
         .exists()
-        .withMessage("Username es obligatorio")
+        .withMessage("name es obligatorio")
         .notEmpty()
-        .withMessage("Username no debe estar vacio")
+        .withMessage("name no debe estar vacio")
         .isString()
         .withMessage("El tipo de dato debe ser string")
-        .isLength({ min: 6, max: 30 })
-        .withMessage("El username debe tener minimo 6 caracteres y máximo 30"),
-    check("email", "Error con el campo email")
+        .isLength({ min: 1, max: 40 })
+        .withMessage("El name debe tener minimo 1 caracteres y máximo 40"),
+    check("description", "Error con el campo description")
         .exists()
-        .withMessage("email es obligatorio")
+        .withMessage("description es obligatorio")
         .notEmpty()
-        .withMessage("email no puede estar vacio")
+        .withMessage("description no puede estar vacio")
         .isString()
-        .withMessage("email debe ser un string")
-        .isEmail()
-        .withMessage("email no tiene formato de correo")
-        .isLength()
-        .withMessage("El email debe tener minimo 10 caracteres y máximo 50"),
-    check("password", "Error con el password")
+        .withMessage("description debe ser un string"),
+    validateResult,
+];
+
+const updateCategoryIncomeValidator = [
+    check("name", "Error con el campo name")
         .exists()
-        .withMessage("password es obligatorio")
+        .withMessage("name es obligatorio")
         .notEmpty()
-        .withMessage("password no puede estar vacio")
+        .withMessage("name no debe estar vacio")
         .isString()
-        .withMessage("El password debe ser un string")
-        .isLength({ min: 8 })
-        .withMessage("El password debe tener minimo 8 caracteres"),
+        .withMessage("El tipo de dato debe ser string")
+        .isLength({ min: 1, max: 40 })
+        .withMessage("El name debe tener minimo 6 caracteres y máximo 40"),
+    check("description", "Error con el campo description")
+        .exists()
+        .withMessage("description es obligatorio")
+        .notEmpty()
+        .withMessage("description no puede estar vacio")
+        .isString()
+        .withMessage("description debe ser un string"),
     validateResult,
 ];
 
 
 // object.hasOwnProperty('propertyName')
-module.exports = { createUserValidator, loginUserValidator, updateUserValidator };
+module.exports = { createCategoryIncomeValidator, updateCategoryIncomeValidator };

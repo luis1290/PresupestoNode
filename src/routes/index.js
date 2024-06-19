@@ -1,4 +1,5 @@
 const userRoute = require('./users.routes');
+const categoryIncomeRoute = require('./categoryIncomes.routes')
 // const companyRoute = require("./companies.routes")
 // const aplicationJobRouter = require('./aplicationjob.routes')
 // const interviewRouter = require("./interviews.routes")
@@ -9,8 +10,10 @@ const userRoute = require('./users.routes');
 
 const apiRouter = (app) => {
   app.use(userRoute);
- 
+  app.use(categoryIncomeRoute);
   // app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 }
+
+
 
 module.exports = apiRouter
