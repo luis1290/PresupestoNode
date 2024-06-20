@@ -28,9 +28,6 @@ module.exports = {
       amount: {
         type: Sequelize.DOUBLE
       },
-      date: {
-        type: Sequelize.DATE
-      },
       description: {
         type: Sequelize.STRING
       },

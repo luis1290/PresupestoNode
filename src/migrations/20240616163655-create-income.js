@@ -28,9 +28,6 @@ module.exports = {
       amount: {
         type: Sequelize.DOUBLE
       },
-      date: {
-        type: Sequelize.DATE
-      },
       description: {
         type: Sequelize.STRING
       },
@@ -48,3 +45,5 @@ module.exports = {
     await queryInterface.dropTable('incomes');
   }
 };
+
+//npx sequelize-cli migration:generate --name remove_date_from_spent
