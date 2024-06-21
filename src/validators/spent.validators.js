@@ -2,7 +2,7 @@
 const { check } = require("express-validator");
 const validateResult = require("../utils/validate");
 
-const createIncomeValidator = [
+const createSpentValidator = [
     check("user_id", "Error con el campo user_id")
         .exists()
         .withMessage("user_id es obligatorio")
@@ -27,7 +27,7 @@ const createIncomeValidator = [
     validateResult,
 ];
 
-const updateIncomeValidator = [
+const updateSpentValidator = [
     check("user_id", "Error con el campo user_id")
         .exists()
         .withMessage("user_id es obligatorio")
@@ -54,4 +54,4 @@ const updateIncomeValidator = [
 
 
 // object.hasOwnProperty('propertyName')
-module.exports = { createIncomeValidator, updateIncomeValidator };
+module.exports = { createSpentValidator, updateSpentValidator };

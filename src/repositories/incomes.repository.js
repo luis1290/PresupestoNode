@@ -22,20 +22,20 @@ const deleteIncome = async (id) => {
 }
 
 const getIncomeSum = async () => {
-    const totalIncome = await income.sum('amount'); 
+    const totalIncome = await income.sum('amount');
     return totalIncome;
 };
 
 const getAllyIncome = async () => {
     const incomDate = await income.findAll({
-        attributes: { exclude: ["createdAt", "updatedAt"] },
+        attributes: { exclude: ["updatedAt"] },
     })
     return incomDate
 }
 
 const getOneIncome = async (name) => {
     const incomDate = await income.findOne({
-        attributes: { exclude: ["createdAt", "updatedAt"] },
+        attributes: { exclude: ["updatedAt"] },
         where: { name }
     });
     return incomDate;

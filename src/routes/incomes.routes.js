@@ -4,13 +4,15 @@ const { createIncomeController, updateIncomeController, deleteIncomeController, 
 const {
     createIncomeValidator, updateIncomeValidator
 } = require("../validators/income.validators");
+const authenticate = require('../middlewares/auth.middleware');
 
 const router = Router();
 
-router.post("/addincome", createIncomeValidator, createIncomeController);
-router.put("/editincome/:id", updateIncomeValidator, updateIncomeController);
-router.delete("/deliteincome/:id", deleteIncomeController);
+router.post("/addincome", createIncomeValidator, authenticate, createIncomeController);
+router.put("/editincome/:id", updateIncomeValidator, authenticate, updateIncomeController);
+router.delete("/deliteincome/:id", authenticate, deleteIncomeController);
 router.get("/getallincome/", getAllImcomeController);
-router.get("/getoneincome/", getAllOneImcomeController);
+router.get("/getotalneincome/", getIncomeTotal);
+router.get("/geoneincome/", getAllOneImcomeController);
 
 module.exports = router;

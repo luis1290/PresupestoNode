@@ -35,7 +35,7 @@ class incomeServices {
         }
     }
 
-    static async getOneIncome(name) {
+    static async getOneIncomeService(name) {
         try {
             const income = await getOneIncome(name);
             return income;
@@ -44,7 +44,7 @@ class incomeServices {
         }
     }
 
-    static async getTotalIncome() {
+    static async getTotalIncomeService() {
         try {
             const income = await getIncomeSum();
             return income;

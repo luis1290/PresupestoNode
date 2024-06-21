@@ -38,6 +38,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
       }
     });
   },

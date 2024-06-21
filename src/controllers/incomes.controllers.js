@@ -44,7 +44,7 @@ const getAllImcomeController = async (req, res, next) => {
 const getAllOneImcomeController = async (req, res, next) => {
     try {
         const nameIncome = req.body
-        const dataIncome = await incomeServices.getOneIncome(nameIncome.name)
+        const dataIncome = await incomeServices.getOneIncomeService(nameIncome.name)
         res.json(dataIncome);
     } catch (error) {
         next(error)
@@ -53,7 +53,7 @@ const getAllOneImcomeController = async (req, res, next) => {
 
 const getIncomeTotal = async (req, res) => {
     try {
-        const totalIncome = await incomeServices.getTotalIncome();
+        const totalIncome = await incomeServices.getTotalIncomeService();
         res.status(200).json({ totalIncome });
     } catch (error) {
         res.status(500).json({ error: error.message });

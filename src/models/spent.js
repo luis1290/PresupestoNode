@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER,
     amount: DataTypes.DOUBLE,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    name: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'spent',
