@@ -1,4 +1,4 @@
-const { income } = require('../models');
+const { income, spent } = require('../models');
 
 const createIncome = async (dataAplication) => {
     const incomDate = await income.create(dataAplication);
@@ -26,6 +26,13 @@ const getIncomeSum = async () => {
     return totalIncome;
 };
 
+const getIncomeBalance = async () => {
+    const totalIncome = await income.sum('amount');
+    const totalSpent = await spent.sum('amount');
+    const balanceIncome = totalIncome - totalSpent;
+    return balanceIncome;
+};
+
 const getAllyIncome = async () => {
     const incomDate = await income.findAll({
         attributes: { exclude: ["updatedAt"] },
@@ -47,5 +54,6 @@ module.exports = {
     deleteIncome,
     getIncomeSum,
     getAllyIncome,
-    getOneIncome
+    getOneIncome,
+    getIncomeBalance
 }

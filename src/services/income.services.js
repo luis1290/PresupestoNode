@@ -1,4 +1,4 @@
-const { createIncome, updateIncome, deleteIncome, getIncomeSum, getAllyIncome, getOneIncome } = require("../repositories/incomes.repository");
+const { createIncome, updateIncome, deleteIncome, getIncomeSum, getAllyIncome, getOneIncome, getIncomeBalance } = require("../repositories/incomes.repository");
 
 class incomeServices {
 
@@ -47,6 +47,15 @@ class incomeServices {
     static async getTotalIncomeService() {
         try {
             const income = await getIncomeSum();
+            return income;
+        } catch (e) {
+            throw e
+        }
+    }
+
+    static async getBalanceIncomeService() {
+        try {
+            const income = await getIncomeBalance();
             return income;
         } catch (e) {
             throw e

@@ -60,11 +60,21 @@ const getIncomeTotal = async (req, res) => {
     }
 };
 
+const getIncomeBalanceController = async (req, res) => {
+    try {
+        const balanceIncome = await incomeServices.getBalanceIncomeService();
+        res.status(200).json({ balanceIncome });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createIncomeController,
     updateIncomeController,
     deleteIncomeController,
     getAllImcomeController,
     getAllOneImcomeController,
-    getIncomeTotal
+    getIncomeTotal,
+    getIncomeBalanceController
 }
