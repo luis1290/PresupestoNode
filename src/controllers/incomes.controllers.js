@@ -73,6 +73,17 @@ const getIncomeBalanceController = async (req, res) => {
     }
 };
 
+const getIncomeByDateRangeController = async (req, res) => {
+    try {
+        const { userId } = req.params
+        const dataIncome = req.body
+        const rangeDateIncome = await incomeServices.getIncomeByDateRangeService(userId, dataIncome);
+        res.status(200).json({ rangeDateIncome });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createIncomeController,
     updateIncomeController,
@@ -80,5 +91,6 @@ module.exports = {
     getAllImcomeController,
     getAllOneImcomeController,
     getIncomeTotal,
-    getIncomeBalanceController
+    getIncomeBalanceController,
+    getIncomeByDateRangeController
 }

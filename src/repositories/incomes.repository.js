@@ -1,4 +1,5 @@
 const { income, spent } = require('../models');
+const { Op } = require('sequelize');
 
 const createIncome = async (dataAplication) => {
     const incomDate = await income.create(dataAplication);
@@ -50,6 +51,18 @@ const getOneIncome = async (name, userId) => {
     return incomDate;
 }
 
+const getIncomeByDateRange = async (userId, dataIncome) => {
+    return income.findAll({
+        attributes: { exclude: ["updatedAt"] },
+        where: {
+            user_id: userId,
+            createdAt: {
+                [Op.between]: [dataIncome.startDate, dataIncome.endDate]
+            }
+        }
+    });
+};
+
 module.exports = {
     createIncome,
     updateIncome,
@@ -57,5 +70,6 @@ module.exports = {
     getIncomeSum,
     getAllyIncome,
     getOneIncome,
-    getIncomeBalance
+    getIncomeBalance,
+    getIncomeByDateRange
 }
