@@ -27,26 +27,26 @@ class incomeServices {
         }
     }
 
-    static async getAllSpentServices() {
+    static async getAllSpentServices(userId) {
         try {
-            return await getAllySpent();
+            return await getAllySpent(userId);
         } catch (error) {
             throw error
         }
     }
 
-    static async getOneSpentService(name) {
+    static async getOneSpentService(name, userId) {
         try {
-            const spent = await getOneSpent(name);
+            const spent = await getOneSpent(name, userId);
             return spent;
         } catch (e) {
             throw e
         }
     }
 
-    static async getTotalSpentService() {
+    static async getTotalSpentService(userId) {
         try {
-            const spent = await getSpentSum();
+            const spent = await getSpentSum(userId);
             return spent;
         } catch (e) {
             throw e

@@ -33,7 +33,8 @@ const deleteIncomeController = async (req, res, next) => {
 
 const getAllImcomeController = async (req, res, next) => {
     try {
-        const dataIncome = await incomeServices.getAllIncomeServices()
+        const { userId } = req.params
+        const dataIncome = await incomeServices.getAllIncomeServices(userId)
         res.json(dataIncome);
     } catch (error) {
         next(error)
@@ -43,8 +44,9 @@ const getAllImcomeController = async (req, res, next) => {
 
 const getAllOneImcomeController = async (req, res, next) => {
     try {
+        const { userId } = req.params
         const nameIncome = req.body
-        const dataIncome = await incomeServices.getOneIncomeService(nameIncome.name)
+        const dataIncome = await incomeServices.getOneIncomeService(nameIncome.name, userId)
         res.json(dataIncome);
     } catch (error) {
         next(error)
@@ -53,7 +55,8 @@ const getAllOneImcomeController = async (req, res, next) => {
 
 const getIncomeTotal = async (req, res) => {
     try {
-        const totalIncome = await incomeServices.getTotalIncomeService();
+        const { userId } = req.params
+        const totalIncome = await incomeServices.getTotalIncomeService(userId);
         res.status(200).json({ totalIncome });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -62,7 +65,8 @@ const getIncomeTotal = async (req, res) => {
 
 const getIncomeBalanceController = async (req, res) => {
     try {
-        const balanceIncome = await incomeServices.getBalanceIncomeService();
+        const { userId } = req.params
+        const balanceIncome = await incomeServices.getBalanceIncomeService(userId);
         res.status(200).json({ balanceIncome });
     } catch (error) {
         res.status(500).json({ error: error.message });

@@ -21,29 +21,31 @@ const deleteIncome = async (id) => {
     return incomDate
 }
 
-const getIncomeSum = async () => {
-    const totalIncome = await income.sum('amount');
+const getIncomeSum = async (userId) => {
+    const totalIncome = await income.sum('amount', { where: { user_id: userId } });
     return totalIncome;
 };
 
-const getIncomeBalance = async () => {
-    const totalIncome = await income.sum('amount');
-    const totalSpent = await spent.sum('amount');
+const getIncomeBalance = async (userId) => {
+    const totalIncome = await income.sum('amount', { where: { user_id: userId } });
+    const totalSpent = await spent.sum('amount', { where: { user_id: userId } });
     const balanceIncome = totalIncome - totalSpent;
     return balanceIncome;
 };
 
-const getAllyIncome = async () => {
+const getAllyIncome = async (userId) => {
     const incomDate = await income.findAll({
         attributes: { exclude: ["updatedAt"] },
+        where: { user_id: userId }
     })
     return incomDate
 }
 
-const getOneIncome = async (name) => {
+const getOneIncome = async (name, userId) => {
     const incomDate = await income.findOne({
         attributes: { exclude: ["updatedAt"] },
-        where: { name }
+        where: { name },
+        where: { user_id: userId }
     });
     return incomDate;
 }

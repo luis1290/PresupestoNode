@@ -21,22 +21,24 @@ const deleteSpent = async (id) => {
     return spentDate
 }
 
-const getSpentSum = async () => {
-    const totalSpent = await spent.sum('amount');
+const getSpentSum = async (userId) => {
+    const totalSpent = await spent.sum('amount', { where: { user_id: userId } });
     return totalSpent;
 };
 
-const getAllySpent = async () => {
+const getAllySpent = async (userId) => {
     const spentDate = await spent.findAll({
         attributes: { exclude: ["updatedAt"] },
+        where: { user_id: userId }
     })
     return spentDate
 }
 
-const getOneSpent = async (name) => {
+const getOneSpent = async (name, userId) => {
     const spentDate = await spent.findOne({
         attributes: { exclude: ["updatedAt"] },
-        where: { name }
+        where: { name },
+        where: { user_id: userId }
     });
     return spentDate;
 }

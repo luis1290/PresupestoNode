@@ -27,35 +27,35 @@ class incomeServices {
         }
     }
 
-    static async getAllIncomeServices() {
+    static async getAllIncomeServices(userId) {
         try {
-            return await getAllyIncome();
+            return await getAllyIncome(userId);
         } catch (error) {
             throw error
         }
     }
 
-    static async getOneIncomeService(name) {
+    static async getOneIncomeService(name, userId) {
         try {
-            const income = await getOneIncome(name);
+            const income = await getOneIncome(name, userId);
             return income;
         } catch (e) {
             throw e
         }
     }
 
-    static async getTotalIncomeService() {
+    static async getTotalIncomeService(userId) {
         try {
-            const income = await getIncomeSum();
+            const income = await getIncomeSum(userId);
             return income;
         } catch (e) {
             throw e
         }
     }
 
-    static async getBalanceIncomeService() {
+    static async getBalanceIncomeService(userId) {
         try {
-            const income = await getIncomeBalance();
+            const income = await getIncomeBalance(userId);
             return income;
         } catch (e) {
             throw e

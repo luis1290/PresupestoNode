@@ -11,9 +11,9 @@ const router = Router();
 router.post("/addspent", createSpentValidator, authenticate, createSpentController);
 router.put("/editspent/:id", updateSpentValidator, authenticate, updateSpentController);
 router.delete("/delitespent/:id", authenticate, deleteSpentController);
-router.get("/getallspent/", getAllSpentController);
-router.get("/getotalnespent/", getSpentTotal);
-router.get("/geonespent/", getAllOneSpentController);
+router.get("/getallspent/:userId", getAllSpentController);
+router.get("/getotalnespent/:userId", getSpentTotal);
+router.get("/geonespent/:userId", getAllOneSpentController);
 
 module.exports = router;
 

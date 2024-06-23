@@ -11,9 +11,9 @@ const router = Router();
 router.post("/addincome", createIncomeValidator, authenticate, createIncomeController);
 router.put("/editincome/:id", updateIncomeValidator, authenticate, updateIncomeController);
 router.delete("/deliteincome/:id", authenticate, deleteIncomeController);
-router.get("/getallincome/", getAllImcomeController);
-router.get("/getotalneincome/", getIncomeTotal);
-router.get("/getbalanceincome/", getIncomeBalanceController);
-router.get("/geoneincome/", getAllOneImcomeController);
+router.get("/getallincome/:userId", getAllImcomeController);
+router.get("/getotalneincome/:userId", getIncomeTotal);
+router.get("/getbalanceincome/:userId", getIncomeBalanceController);
+router.get("/geoneincome/:userId", getAllOneImcomeController);
 
 module.exports = router;

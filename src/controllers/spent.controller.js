@@ -33,7 +33,8 @@ const deleteSpentController = async (req, res, next) => {
 
 const getAllSpentController = async (req, res, next) => {
     try {
-        const dataSpent = await spentServices.getAllSpentServices()
+        const { userId } = req.params
+        const dataSpent = await spentServices.getAllSpentServices(userId)
         res.json(dataSpent);
     } catch (error) {
         next(error)
@@ -43,8 +44,9 @@ const getAllSpentController = async (req, res, next) => {
 
 const getAllOneSpentController = async (req, res, next) => {
     try {
+        const { userId } = req.params
         const nameSpent = req.body
-        const dataSpent = await spentServices.getOneSpentService(nameSpent.name)
+        const dataSpent = await spentServices.getOneSpentService(nameSpent.name, userId)
         res.json(dataSpent);
     } catch (error) {
         next(error)
@@ -53,7 +55,8 @@ const getAllOneSpentController = async (req, res, next) => {
 
 const getSpentTotal = async (req, res) => {
     try {
-        const totalSpent = await spentServices.getTotalSpentService();
+        const { userId } = req.params
+        const totalSpent = await spentServices.getTotalSpentService(userId);
         res.status(200).json({ totalSpent });
     } catch (error) {
         res.status(500).json({ error: error.message });
