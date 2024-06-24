@@ -52,7 +52,7 @@ const getOneIncome = async (name, userId) => {
 }
 
 const getIncomeByDateRange = async (userId, dataIncome) => {
-    return income.findAll({
+    const incomDate = await income.findAll({
         attributes: { exclude: ["updatedAt"] },
         where: {
             user_id: userId,
@@ -61,6 +61,19 @@ const getIncomeByDateRange = async (userId, dataIncome) => {
             }
         }
     });
+    return incomDate
+};
+
+const getIncomeByDateRangeTotal = async (userId, dataSpent) => {
+    const incomDate = await income.sum('amount', {
+        where: {
+            user_id: userId,
+            createdAt: {
+                [Op.between]: [dataSpent.startDate, dataSpent.endDate]
+            }
+        }
+    });
+    return incomDate !== null ? incomDate : 0;
 };
 
 module.exports = {
@@ -71,5 +84,6 @@ module.exports = {
     getAllyIncome,
     getOneIncome,
     getIncomeBalance,
-    getIncomeByDateRange
+    getIncomeByDateRange,
+    getIncomeByDateRangeTotal
 }

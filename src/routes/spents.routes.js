@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { createSpentController, updateSpentController, deleteSpentController, getAllSpentController, getAllOneSpentController, getSpentTotal } = require('../controllers/spent.controller');
+const { createSpentController, updateSpentController, deleteSpentController, getAllSpentController, getAllOneSpentController, getSpentTotal, getSpentByDateRangeController, getSpentByDateRangeTotalController } = require('../controllers/spent.controller');
 
 const {
     createSpentValidator, updateSpentValidator
@@ -14,6 +14,8 @@ router.delete("/delitespent/:id", authenticate, deleteSpentController);
 router.get("/getallspent/:userId", getAllSpentController);
 router.get("/getotalnespent/:userId", getSpentTotal);
 router.get("/geonespent/:userId", getAllOneSpentController);
+router.get("/getspentdatarange/:userId", getSpentByDateRangeController);
+router.get("/getspentdatarangetotal/:userId", getSpentByDateRangeTotalController);
 
 module.exports = router;
 

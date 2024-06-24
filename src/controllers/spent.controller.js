@@ -63,11 +63,35 @@ const getSpentTotal = async (req, res) => {
     }
 };
 
+const getSpentByDateRangeController = async (req, res) => {
+    try {
+        const { userId } = req.params
+        const dataSpent = req.body
+        const rangeDateSpent = await spentServices.getSpentByDateRangeService(userId, dataSpent);
+        res.status(200).json({ rangeDateSpent });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+const getSpentByDateRangeTotalController = async (req, res) => {
+    try {
+        const { userId } = req.params
+        const dataSpent = req.body
+        const rangeDateSpent = await spentServices.getSpentByDateRangeTotalService(userId, dataSpent);
+        res.status(200).json({ rangeDateSpent });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createSpentController,
     updateSpentController,
     deleteSpentController,
     getAllSpentController,
     getAllOneSpentController,
-    getSpentTotal
+    getSpentTotal,
+    getSpentByDateRangeController,
+    getSpentByDateRangeTotalController
 }

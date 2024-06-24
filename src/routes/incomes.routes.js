@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { createIncomeController, updateIncomeController, deleteIncomeController, getAllImcomeController, getAllOneImcomeController, getIncomeTotal, getIncomeBalanceController, getIncomeByDateRangeController } = require('../controllers/incomes.controllers');
+const { createIncomeController, updateIncomeController, deleteIncomeController, getAllImcomeController, getAllOneImcomeController, getIncomeTotal, getIncomeBalanceController, getIncomeByDateRangeController, getIncomeByDateRangeTotalController } = require('../controllers/incomes.controllers');
 
 const {
     createIncomeValidator, updateIncomeValidator
@@ -16,5 +16,6 @@ router.get("/getotalneincome/:userId", getIncomeTotal);
 router.get("/getbalanceincome/:userId", getIncomeBalanceController);
 router.get("/geoneincome/:userId", getAllOneImcomeController);
 router.get("/getincomdatarange/:userId", getIncomeByDateRangeController);
+router.get("/getincomedatarangetotal/:userId", getIncomeByDateRangeTotalController);
 
 module.exports = router;

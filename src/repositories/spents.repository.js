@@ -1,4 +1,5 @@
 const { spent } = require('../models');
+const { Op } = require('sequelize');
 
 const createSpent = async (dataAplication) => {
     const spentDate = await spent.create(dataAplication);
@@ -43,11 +44,39 @@ const getOneSpent = async (name, userId) => {
     return spentDate;
 }
 
+const getSpentByDateRange = async (userId, dataSpent) => {
+    const spentDate = await spent.findAll({
+        attributes: { exclude: ["updatedAt"] },
+        where: {
+            user_id: userId,
+            createdAt: {
+                [Op.between]: [dataSpent.startDate, dataSpent.endDate]
+            }
+        }
+    });
+    return spentDate
+};
+
+
+const getSpentByDateRangeTotal = async (userId, dataSpent) => {
+    const spentDate = await spent.sum('amount', {
+        where: {
+            user_id: userId,
+            createdAt: {
+                [Op.between]: [dataSpent.startDate, dataSpent.endDate]
+            }
+        }
+    });
+    return spentDate !== null ? spentDate : 0;
+};
+
 module.exports = {
     createSpent,
     updateSpent,
     deleteSpent,
     getSpentSum,
     getAllySpent,
-    getOneSpent
+    getOneSpent,
+    getSpentByDateRange,
+    getSpentByDateRangeTotal
 }

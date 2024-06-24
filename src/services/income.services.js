@@ -1,4 +1,4 @@
-const { createIncome, updateIncome, deleteIncome, getIncomeSum, getAllyIncome, getOneIncome, getIncomeBalance, getIncomeByDateRange } = require("../repositories/incomes.repository");
+const { createIncome, updateIncome, deleteIncome, getIncomeSum, getAllyIncome, getOneIncome, getIncomeBalance, getIncomeByDateRange, getIncomeByDateRangeTotal } = require("../repositories/incomes.repository");
 
 class incomeServices {
 
@@ -65,6 +65,15 @@ class incomeServices {
     static async getIncomeByDateRangeService(userId, dataIncome) {
         try {
             const income = await getIncomeByDateRange(userId, dataIncome);
+            return income;
+        } catch (e) {
+            throw e
+        }
+    }
+
+    static async getIncomeByDateRangeTotalService(userId, dataSpent) {
+        try {
+            const income = await getIncomeByDateRangeTotal(userId, dataSpent);
             return income;
         } catch (e) {
             throw e

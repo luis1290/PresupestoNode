@@ -1,4 +1,4 @@
-const { createSpent, updateSpent, deleteSpent, getSpentSum, getAllySpent, getOneSpent } = require("../repositories/spents.repository");
+const { createSpent, updateSpent, deleteSpent, getSpentSum, getAllySpent, getOneSpent, getSpentByDateRange, getSpentByDateRangeTotal } = require("../repositories/spents.repository");
 
 class incomeServices {
 
@@ -47,6 +47,24 @@ class incomeServices {
     static async getTotalSpentService(userId) {
         try {
             const spent = await getSpentSum(userId);
+            return spent;
+        } catch (e) {
+            throw e
+        }
+    }
+
+    static async getSpentByDateRangeService(userId, dataSpent) {
+        try {
+            const spent = await getSpentByDateRange(userId, dataSpent);
+            return spent;
+        } catch (e) {
+            throw e
+        }
+    }
+
+    static async getSpentByDateRangeTotalService(userId, dataSpent) {
+        try {
+            const spent = await getSpentByDateRangeTotal(userId, dataSpent);
             return spent;
         } catch (e) {
             throw e
