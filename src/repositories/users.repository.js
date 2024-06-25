@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { spent } = require('../models');
 
 const createUser = async (newUser) => {
   const user = await User.create(newUser);
@@ -33,23 +34,13 @@ const validateUser = async (id) => {
 }
 
 
-const getAplicationByUserId = async (id) => {
+const getUserId = async (id) => {
   const user = await User.findByPk(id, {
     attributes: { exclude: ["password", "avatar", "validate_user", "createdAt", "updatedAt"] },
     include: [
       {
-        model: aplicatio_jobs,
-        attributes: { exclude: ["createdAt", "updatedAt", "company_id"] },
-        include: [
-          {
-            model: companies,
-            attributes: { exclude: ["createdAt", "updatedAt"] },
-          },
-          {
-            model: interviews,
-            attributes: { exclude: ["createdAt", "updatedAt", "aplication_job_id"] },
-          }
-        ]
+        model: spent,
+        attributes: { exclude: [ "updatedAt"] }
       }
     ]
   })
@@ -106,7 +97,7 @@ module.exports = {
   createUser,
   loginUser,
   updateUser,
-  getAplicationByUserId,
+  getUserId,
   getInterviewByUserId,
   validateUser,
   virifyEmailInBD,

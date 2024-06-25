@@ -75,12 +75,24 @@ const validateUserController = async (req, res, next) => {
   }
 };
 
+const getUserIdController = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    console.log('entra al controlador')
+    const userSpent = await UserServices.getUserIdServices(id)
+    res.json(userSpent);
+  } catch (error) {
+    next(error)
+  }
+};
+
 
 module.exports = {
   createUserController,
   updateUserController,
   login,
   validateUserController,
+  getUserIdController
   // emailResetPassController,
   // resetPasswordController
 }
