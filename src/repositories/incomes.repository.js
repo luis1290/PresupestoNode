@@ -1,5 +1,7 @@
-const { income, spent } = require('../models');
+const { income, spent, categoryIncome } = require('../models');
 const { Op } = require('sequelize');
+
+
 
 const createIncome = async (dataAplication) => {
     const incomDate = await income.create(dataAplication);
@@ -37,7 +39,14 @@ const getIncomeBalance = async (userId) => {
 const getAllyIncome = async (userId) => {
     const incomDate = await income.findAll({
         attributes: { exclude: ["updatedAt"] },
-        where: { user_id: userId }
+        include: [
+            {
+                model: categoryIncome,
+                attributes: { exclude: ["updatedAt"] },
+
+            }
+        ],
+        where: { user_id: userId },
     })
     return incomDate
 }

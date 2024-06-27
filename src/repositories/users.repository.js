@@ -1,5 +1,7 @@
 const { User } = require('../models');
 const { spent } = require('../models');
+const { categorySpent } = require('../models');
+
 
 const createUser = async (newUser) => {
   const user = await User.create(newUser);
@@ -40,7 +42,14 @@ const getUserId = async (id) => {
     include: [
       {
         model: spent,
-        attributes: { exclude: [ "updatedAt"] }
+        attributes: { exclude: ["updatedAt"] },
+        include: [
+          {
+            model: categorySpent,
+            attributes: { exclude: ["updatedAt"] },
+
+          }
+        ]
       }
     ]
   })
