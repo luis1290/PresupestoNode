@@ -15,7 +15,7 @@ router.get("/getallincome/:userId", getAllImcomeController);
 router.get("/getotalneincome/:userId", getIncomeTotal);
 router.get("/getbalanceincome/:userId", getIncomeBalanceController);
 router.get("/geoneincome/:userId", getAllOneImcomeController);
-router.get("/getincomdatarange/:userId", getIncomeByDateRangeController);
+router.post("/getincomdatarange/:userId", getIncomeByDateRangeController);
 router.get("/getincomedatarangetotal/:userId", getIncomeByDateRangeTotalController);
 
 module.exports = router;

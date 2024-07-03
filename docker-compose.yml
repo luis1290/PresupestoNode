@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  app:
+    container_name: presupuesto
+    build:
+      context: .
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: 1234
+      DB_NAME: presupuesto-db
+      DB_HOST: db
+      DB_PORT: 5432  # Puerto de PostgreSQL en el contenedor
+    volumes:
+      - .:/usr/src/app
+
+  db:
+    image: postgres:13
+    container_name: presupuesto-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: presupuesto-db
+    ports:
+      - "5433:5432"  # Puerto de PostgreSQL en el host
