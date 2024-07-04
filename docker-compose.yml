@@ -1,29 +1,31 @@
-version: '3'
+version: '3.8'
 
 services:
-  app:
-    container_name: presupuesto
-    build:
-      context: .
-    ports:
-      - "4000:4000"
-    depends_on:
-      - db
-    environment:
-      DB_USERNAME: postgres
-      DB_PASSWORD: 1234
-      DB_NAME: presupuesto-db
-      DB_HOST: db
-      DB_PORT: 5432  # Puerto de PostgreSQL en el contenedor
-    volumes:
-      - .:/usr/src/app
-
   db:
     image: postgres:13
-    container_name: presupuesto-db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: presupuesto-db
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - db-data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"  # Puerto de PostgreSQL en el host
+      - "5432:5432"
+
+  api:
+    build: .
+    ports:
+      - "4500:4500"
+    env_file:
+      - .env
+    environment:
+      DB_HOST: db
+      DB_USER: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      PORT: 4500
+    depends_on:
+      - db
+
+volumes:
+  db-data:

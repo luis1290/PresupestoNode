@@ -1,22 +1,24 @@
-# Usa una imagen base de Node.js
+# Usar una imagen base oficial de Node.js
 FROM node:14
 
-# Establece el directorio de trabajo dentro del contenedor
+# Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /usr/src/app
 
-# Copia los archivos de tu aplicación desde tu máquina local al contenedor
+# Copiar el archivo package.json y package-lock.json (si existe)
+COPY package*.json ./
+
+# Instalar las dependencias del proyecto
+RUN npm install
+
+# Copiar el resto del código de la aplicación
 COPY . .
 
-# Instala las dependencias
-RUN npm install 
+# Copiar el archivo .env al contenedor
+COPY .env .env
 
+# Exponer el puerto en el que la aplicación va a correr  SELECT * FROM Users;   psql -U postgres -d presupuesto-docker
+EXPOSE 4500
 
-
-
-# Expone el puerto en el que funciona tu aplicación
-EXPOSE 4000
-
-
-
-# Comando para ejecutar la aplicación cuando se inicie el contenedor
-CMD ["npm", "run", "dev"]
+# Definir el comando para correr la aplicación  docker run -d -p 4000:4000 --name presupuesto-container presupuesto-api
+# npx sequelize-cli db:migrate --to 20240616163655-create-income.js
+CMD ["npm", "start"]
