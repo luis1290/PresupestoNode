@@ -8,7 +8,8 @@
     "init": "node ./src/app.js",
     "dev": "nodemon ./src/app.js",
     "start": "npm run init",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker-start": "sequelize db:migrate --to 20240616162304-create-user.js && sequelize db:migrate --to 20240616164949-create-category-income.js && sequelize db:migrate --to 20240616164903-create-category-spent.js && sequelize db:migrate --to 20240616163655-create-income.js && sequelize db:migrate --to 20240616163639-create-spent.js"
   },
   "keywords": [],
   "author": "",

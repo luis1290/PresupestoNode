@@ -16,11 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   spent.init({
+    name: DataTypes.STRING,
     user_id: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER,
     amount: DataTypes.DOUBLE,
     description: DataTypes.STRING,
-    name: DataTypes.STRING
+    
   }, {
     sequelize,
     modelName: 'spent',

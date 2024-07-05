@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -38,11 +42,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      }
+      }     
     });
   },
   async down(queryInterface, Sequelize) {
