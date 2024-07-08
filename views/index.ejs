@@ -71,7 +71,7 @@
         const token = getParameterValue('token');
 
         const verifyEmail = () => {
-            axios.post(`http://localhost:8000/validateuser/${token}`)
+            axios.post(`http://localhost:4500/validateuser/${token}`)
                 .then(() => alert("Registrado"))
                 .catch(e => console.log(e))
         }
