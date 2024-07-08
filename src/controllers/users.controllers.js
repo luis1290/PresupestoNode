@@ -87,12 +87,37 @@ const getUserIdController = async (req, res, next) => {
 };
 
 
+const resetPasswordController = async (req, res, next) => {
+  try {
+
+    const { password, id } = req.body
+    const hash = await UserServices.hashed(password)
+    await UserServices.resetPasswordServices({ id, password: hash })
+    const user = await UserServices.getUserByIdServices(id)
+    sendChangePassMail(user.dataValues.email, { email: user.dataValues.email })
+    res.status(204).send();
+  } catch (error) {
+    next(error)
+  }
+};
+
+const emailResetPassController = async (req, res, next) => {
+  try {
+    const { email } = req.body
+    const user = await UserServices.virifyEmailBdServices(email)
+    res.json(user);
+    sendResetMail(email, { id: user.dataValues.id })
+  } catch (error) {
+    next(error)
+  }
+};
+
 module.exports = {
   createUserController,
   updateUserController,
   login,
   validateUserController,
-  getUserIdController
-  // emailResetPassController,
-  // resetPasswordController
+  getUserIdController,
+  emailResetPassController,
+  resetPasswordController
 }

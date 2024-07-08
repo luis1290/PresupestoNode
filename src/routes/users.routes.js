@@ -9,7 +9,7 @@ const {
 
 const upload = require("../middlewares/multer.middleware");
 const authenticate = require("../middlewares/auth.middleware");
-const { createUserController, login, updateUserController, validateUserController, getUserIdController} = require("../controllers/users.controllers");
+const { createUserController, login, updateUserController, validateUserController, getUserIdController, resetPasswordController, emailResetPassController } = require("../controllers/users.controllers");
 const { validateImage } = require("../middlewares/validateImage.middleware");
 
 
@@ -26,9 +26,9 @@ router.post("/validateuser/:token", validateUserController);
 
 router.get("/users/:id", authenticate, getUserIdController);
 
-// router.get("/emailreset", emailResetPassController);
+router.get("/emailreset", emailResetPassController);
 
-// router.put("/resetpassword", resetPasswordController);
+router.put("/resetpassword", resetPasswordController);
 
 
 
