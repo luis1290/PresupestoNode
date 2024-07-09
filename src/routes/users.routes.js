@@ -26,7 +26,7 @@ router.post("/validateuser/:token", validateUserController);
 
 router.get("/users/:id", authenticate, getUserIdController);
 
-router.get("/emailreset", emailResetPassController);
+router.post("/emailreset", emailResetPassController);
 
 router.put("/resetpassword", resetPasswordController);
 

@@ -1,15 +1,15 @@
-const { income, spent, categoryIncome } = require('../models');
+const { incomes, spents, categoryincomes } = require('../models');
 const { Op } = require('sequelize');
 
 
 
 const createIncome = async (dataAplication) => {
-    const incomDate = await income.create(dataAplication);
+    const incomDate = await incomes.create(dataAplication);
     return incomDate;
 }
 
 const updateIncome = async (dataAplication, id) => {
-    const incomDate = await income.update(dataAplication,
+    const incomDate = await incomes.update(dataAplication,
         {
             where: { id }
         })
@@ -18,30 +18,30 @@ const updateIncome = async (dataAplication, id) => {
 
 
 const deleteIncome = async (id) => {
-    const incomDate = await income.destroy({
+    const incomDate = await incomes.destroy({
         where: { id }
     })
     return incomDate
 }
 
 const getIncomeSum = async (userId) => {
-    const totalIncome = await income.sum('amount', { where: { user_id: userId } });
+    const totalIncome = await incomes.sum('amount', { where: { user_id: userId } });
     return totalIncome;
 };
 
 const getIncomeBalance = async (userId) => {
-    const totalIncome = await income.sum('amount', { where: { user_id: userId } });
-    const totalSpent = await spent.sum('amount', { where: { user_id: userId } });
+    const totalIncome = await incomes.sum('amount', { where: { user_id: userId } });
+    const totalSpent = await spents.sum('amount', { where: { user_id: userId } });
     const balanceIncome = totalIncome - totalSpent;
     return balanceIncome;
 };
 
 const getAllyIncome = async (userId) => {
-    const incomDate = await income.findAll({
+    const incomDate = await incomes.findAll({
         attributes: { exclude: ["updatedAt"] },
         include: [
             {
-                model: categoryIncome,
+                model: categoryincomes,
                 attributes: { exclude: ["updatedAt"] },
 
             }
@@ -52,7 +52,7 @@ const getAllyIncome = async (userId) => {
 }
 
 const getOneIncome = async (name, userId) => {
-    const incomDate = await income.findOne({
+    const incomDate = await incomes.findOne({
         attributes: { exclude: ["updatedAt"] },
         where: { name },
         where: { user_id: userId }
@@ -61,7 +61,7 @@ const getOneIncome = async (name, userId) => {
 }
 
 const getIncomeByDateRange = async (userId, dataIncome) => {
-    const incomDate = await income.findAll({
+    const incomDate = await incomes.findAll({
         attributes: { exclude: ["updatedAt"] },
         where: {
             user_id: userId,
@@ -74,7 +74,7 @@ const getIncomeByDateRange = async (userId, dataIncome) => {
 };
 
 const getIncomeByDateRangeTotal = async (userId, dataSpent) => {
-    const incomDate = await income.sum('amount', {
+    const incomDate = await incomes.sum('amount', {
         where: {
             user_id: userId,
             createdAt: {

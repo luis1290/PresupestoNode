@@ -1,4 +1,4 @@
-const { createUser, loginUser, updateUser, getUserId, resetPassword } = require("../repositories/users.repository")
+const { createUser, loginUser, updateUser, getUserId, resetPassword, virifyEmailInBD, getUserById } = require("../repositories/users.repository")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();

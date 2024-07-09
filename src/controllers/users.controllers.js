@@ -1,6 +1,6 @@
 const UserServices = require("../services/users.services");
 const { sendWelcomeMail, sendChangePassMail, sendResetMail } = require("../utils/sendMails");
-const { User } = require('../models');
+const { users } = require('../models');
 const jwt = require("jsonwebtoken");
 
 const createUserController = async (req, res, next) => {
@@ -63,7 +63,7 @@ const validateUserController = async (req, res, next) => {
         message: "verificacion incorrecta, solicite informacion "
       })
     }
-    await User.update({
+    await users.update({
       validate: true
     }, {
       where: { email: decode.email }
