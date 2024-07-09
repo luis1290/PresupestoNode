@@ -1,13 +1,13 @@
-const { spent } = require('../models');
+const { spents } = require('../models');
 const { Op } = require('sequelize');
 
 const createSpent = async (dataAplication) => {
-    const spentDate = await spent.create(dataAplication);
+    const spentDate = await spents.create(dataAplication);
     return spentDate;
 }
 
 const updateSpent = async (dataAplication, id) => {
-    const spentDate = await spent.update(dataAplication,
+    const spentDate = await spents.update(dataAplication,
         {
             where: { id }
         })
@@ -16,19 +16,19 @@ const updateSpent = async (dataAplication, id) => {
 
 
 const deleteSpent = async (id) => {
-    const spentDate = await spent.destroy({
+    const spentDate = await spents.destroy({
         where: { id }
     })
     return spentDate
 }
 
 const getSpentSum = async (userId) => {
-    const totalSpent = await spent.sum('amount', { where: { user_id: userId } });
+    const totalSpent = await spents.sum('amount', { where: { user_id: userId } });
     return totalSpent;
 };
 
 const getAllySpent = async (userId) => {
-    const spentDate = await spent.findAll({
+    const spentDate = await spents.findAll({
         attributes: { exclude: ["updatedAt"] },
         where: { user_id: userId }
     })
@@ -36,7 +36,7 @@ const getAllySpent = async (userId) => {
 }
 
 const getOneSpent = async (name, userId) => {
-    const spentDate = await spent.findOne({
+    const spentDate = await spents.findOne({
         attributes: { exclude: ["updatedAt"] },
         where: { name },
         where: { user_id: userId }
@@ -45,7 +45,7 @@ const getOneSpent = async (name, userId) => {
 }
 
 const getSpentByDateRange = async (userId, dataSpent) => {
-    const spentDate = await spent.findAll({
+    const spentDate = await spents.findAll({
         attributes: { exclude: ["updatedAt"] },
         where: {
             user_id: userId,
@@ -59,7 +59,7 @@ const getSpentByDateRange = async (userId, dataSpent) => {
 
 
 const getSpentByDateRangeTotal = async (userId, dataSpent) => {
-    const spentDate = await spent.sum('amount', {
+    const spentDate = await spents.sum('amount', {
         where: {
             user_id: userId,
             createdAt: {

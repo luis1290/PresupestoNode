@@ -1,12 +1,12 @@
-const { categorySpent } = require('../models');
+const { categoryspents } = require('../models');
 
 const createCategorySpent = async (dataAplication) => {
-    const spentCategory = await categorySpent.create(dataAplication);
+    const spentCategory = await categoryspents.create(dataAplication);
     return spentCategory;
 }
 
 const updateCategorySpent = async (dataAplication, id) => {
-    const spentCategory = await categorySpent.update(dataAplication,
+    const spentCategory = await categoryspents.update(dataAplication,
         {
             where: { id }
         })
@@ -14,21 +14,21 @@ const updateCategorySpent = async (dataAplication, id) => {
 }
 
 const deleteCategorySpent = async (id) => {
-    const spentCategory = await categorySpent.destroy({
+    const spentCategory = await categoryspents.destroy({
         where: { id }
     })
     return spentCategory
 }
 
 const getAllCategorySpent = async () => {
-    const spentCategory = await categorySpent.findAll({
+    const spentCategory = await categoryspents.findAll({
         attributes: { exclude: ["createdAt", "updatedAt"] },
     })
     return spentCategory
 }
 
 const getOneCategorySpent = async (name) => {
-    const spentCategory = await categorySpent.findOne({
+    const spentCategory = await categoryspents.findOne({
         attributes: { exclude: ["createdAt", "updatedAt"] },
         where: { name }
     });

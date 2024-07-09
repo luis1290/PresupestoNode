@@ -1,22 +1,22 @@
-const { User } = require('../models');
-const { spent } = require('../models');
-const { categorySpent } = require('../models');
+const { users } = require('../models');
+const { spents } = require('../models');
+const { categoryspents } = require('../models');
 
 
 const createUser = async (newUser) => {
-  const user = await User.create(newUser);
+  const user = await users.create(newUser);
   return user;
 }
 
 const loginUser = async (email) => {
-  const user = await User.findOne({
+  const user = await users.findOne({
     where: { email }
   });
   return user;
 }
 
 const updateUser = async (dataUser, id) => {
-  const user = await User.update({
+  const user = await users.update({
     name: dataUser.name,
     url_avatar: dataUser.url_avatar,
     avatar: dataUser.avatar
@@ -37,15 +37,15 @@ const validateUser = async (id) => {
 
 
 const getUserId = async (id) => {
-  const user = await User.findByPk(id, {
+  const user = await users.findByPk(id, {
     attributes: { exclude: ["password", "avatar", "validate_user", "createdAt", "updatedAt"] },
     include: [
       {
-        model: spent,
+        model: spents,
         attributes: { exclude: ["updatedAt"] },
         include: [
           {
-            model: categorySpent,
+            model: categoryspents,
             attributes: { exclude: ["updatedAt"] },
 
           }
@@ -57,7 +57,7 @@ const getUserId = async (id) => {
 }
 
 const getInterviewByUserId = async (id) => {
-  const user = await User.findByPk(id, {
+  const user = await users.findByPk(id, {
     attributes: { exclude: ["password", "avatar", "url_avatar", "validate_user", "createdAt", "updatedAt"] },
     include: [
       {
@@ -70,7 +70,7 @@ const getInterviewByUserId = async (id) => {
 }
 
 const virifyEmailInBD = async (email) => {
-  const user = await User.findOne({
+  const user = await users.findOne({
     attributes: { exclude: ["createdAt", "updatedAt", "password"] },
     where: {
       email
@@ -85,7 +85,7 @@ const virifyEmailInBD = async (email) => {
 
 const resetPassword = async (resetPass) => {
   console.log(resetPass)
-  const user = await User.update({
+  const user = await users.update({
     password: resetPass.password,
   }, {
     where: { id: resetPass.id }
@@ -94,7 +94,7 @@ const resetPassword = async (resetPass) => {
 }
 
 const getUserById = async (id) => {
-  const user = await User.findByPk(id, {
+  const user = await users.findByPk(id, {
     attributes: { exclude: ["createdAt", "updatedAt", "password"] }
   })
   return user

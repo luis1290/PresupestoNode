@@ -30,6 +30,9 @@ EXPOSE 4500
 
 # sequelize migration:generate --name add-createdAt-updatedAt-income  /npx sequelize-cli db:migrate
 
+# npx sequelize-auto -o "./src/models" -d presupuesto -h db -u postgres -p 5432 -x 1234 -e postgres -v
+
+
 # sequelize migration:generate --name add-createdAt-updatedAt-spent  / psql -U postgres -d presupuesto -h db -p 5432
 
 # Definir el comando para correr la aplicación  docker run -d -p 4000:4000 --name presupuesto-container presupuesto-api
